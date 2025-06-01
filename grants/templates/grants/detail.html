@@ -1,0 +1,11 @@
+{% if error %}
+    <p>{{ error }}</p>
+{% else %}
+    <h2>{{ grant.name }}</h2>
+    <p><strong>Grantor:</strong> {{ grant.grantor }}</p>
+    <p><strong>Country:</strong> {{ grant.country }}</p>
+    <p><strong>Site:</strong> <a href="{{ grant.site }}">{{ grant.site }}</a></p>
+    <p><strong>Facts:</strong></p>
+    <pre>{{ grant.facts }}</pre>
+    <a href="/search/?q={{ query }}">Back to Results</a>
+{% endif %}

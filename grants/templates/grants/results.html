@@ -1,0 +1,10 @@
+<h2>Results for "{{ query }}"</h2>
+<ul>
+    {% for id, name, grantor in results %}
+        <li><a href="/grant/{{ id }}/?q={{ query }}">{{ name }}</a> ({{ grantor }})</li>
+    {% empty %}
+        <li>No results found.</li>
+    {% endfor %}
+</ul>
+
+<a href="/">Back to Search</a>
