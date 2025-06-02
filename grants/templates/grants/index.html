@@ -6,37 +6,11 @@
         <h1 class="display-4 mb-4">Найдите Свой Идеальный Грант</h1>
         <p class="lead mb-5">Ищите среди тысяч грантов возможность финансирования, соответствующую вашим потребностям.</p>
         <div class="search-box">
-            <form method="get" class="d-flex gap-2">
-                <input type="text" name="q" class="form-control form-control-lg" placeholder="Поиск грантов..." value="{{ query }}" required>
+            <form action="/search/" method="get" class="d-flex gap-2">
+                <input type="text" name="q" class="form-control form-control-lg" placeholder="Поиск грантов..." required>
                 <button type="submit" class="btn btn-light btn-lg px-4">Поиск</button>
             </form>
         </div>
     </div>
 </section>
-
-{% if query %}
-<div class="container py-5">
-    <h2 class="mb-4">Результаты поиска "{{ query }}"</h2>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for id, name, grantor in results %}
-        <div class="col">
-            <div class="card h-100 grant-card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">{{ name }}</h5>
-                    <p class="card-text text-muted">{{ grantor }}</p>
-                    <a href="/grant/{{ id }}/?q={{ query }}" class="btn btn-primary">Подробнее</a>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <div class="col-12 text-center">
-            <div class="alert alert-info" role="alert">
-                По вашему запросу ничего не найдено. Попробуйте другие ключевые слова.
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
 {% endblock %}
