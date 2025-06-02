@@ -1,4 +1,16 @@
-<form action="/search/" method="get">
-    <input type="text" name="q" placeholder="Search grants..." required>
-    <button type="submit">Search</button>
-</form>
+{% extends 'grants/base.html' %}
+
+{% block content %}
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 mb-4">Find Your Perfect Grant</h1>
+        <p class="lead mb-5">Search through thousands of grants to find the funding opportunity that matches your needs.</p>
+        <div class="search-box">
+            <form action="/search/" method="get" class="d-flex gap-2">
+                <input type="text" name="q" class="form-control form-control-lg" placeholder="Search grants..." required>
+                <button type="submit" class="btn btn-light btn-lg px-4">Search</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

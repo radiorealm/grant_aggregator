@@ -1,10 +1,37 @@
-<h2>Results for "{{ query }}"</h2>
-<ul>
-    {% for id, name, grantor in results %}
-        <li><a href="/grant/{{ id }}/?q={{ query }}">{{ name }}</a> ({{ grantor }})</li>
-    {% empty %}
-        <li>No results found.</li>
-    {% endfor %}
-</ul>
+{% extends 'grants/base.html' %}
 
-<a href="/">Back to Search</a>
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col">
+            <a href="/" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Back to Search
+            </a>
+            <h2 class="mt-3">Results for "{{ query }}"</h2>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for id, name, grantor in results %}
+        <div class="col">
+            <div class="card h-100 grant-card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ name }}</h5>
+                    <p class="card-text text-muted">{{ grantor }}</p>
+                    <a href="/grant/{{ id }}/?q={{ query }}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <div class="alert alert-info" role="alert">
+                No results found for your search. Please try different keywords.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

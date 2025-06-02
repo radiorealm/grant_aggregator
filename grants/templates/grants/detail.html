@@ -1,11 +1,58 @@
-{% if error %}
-    <p>{{ error }}</p>
-{% else %}
-    <h2>{{ grant.name }}</h2>
-    <p><strong>Grantor:</strong> {{ grant.grantor }}</p>
-    <p><strong>Country:</strong> {{ grant.country }}</p>
-    <p><strong>Site:</strong> <a href="{{ grant.site }}">{{ grant.site }}</a></p>
-    <p><strong>Facts:</strong></p>
-    <pre>{{ grant.facts }}</pre>
-    <a href="/search/?q={{ query }}">Back to Results</a>
-{% endif %}
+{% extends 'grants/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% else %}
+    <a href="/search/?q={{ query }}" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Back to Results
+    </a>
+
+    <div class="card mt-4 shadow">
+        <div class="card-body">
+            <h2 class="card-title mb-4">{{ grant.name }}</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <strong class="text-muted">Grantor:</strong>
+                        <p class="mb-0">{{ grant.grantor }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <strong class="text-muted">Country:</strong>
+                        <p class="mb-0">{{ grant.country }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <strong class="text-muted">Website:</strong>
+                        <p class="mb-0">
+                            <a href="{{ grant.site }}" target="_blank" class="text-primary">
+                                {{ grant.site }}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-box-arrow-up-right ms-1" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                                </svg>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <strong class="text-muted">Details:</strong>
+                <div class="mt-2 p-3 bg-light rounded">
+                    {{ grant.facts|linebreaks }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
