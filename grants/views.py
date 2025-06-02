@@ -7,12 +7,9 @@ def format_list_or_string(value):
     return str(value)
 
 def index(request):
-    return render(request, 'grants/index.html')
-
-def search(request):
     query = request.GET.get('q', '')
     results = database.search_grants(query) if query else []
-    return render(request, 'grants/results.html', {'results': results, 'query': query})
+    return render(request, 'grants/index.html', {'results': results, 'query': query})
 
 def detail(request, grant_id):
     grant = database.get_grant_by_id(grant_id)
